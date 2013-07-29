@@ -1,0 +1,39 @@
+@CHARSET "UTF-8";
+
+.heading {
+	text-align: center;
+	color: Black;
+	font-size: 20pt;
+	font-weight : 600
+}
+
+.message {
+	text-align: center;
+	color: Black;
+	font-size: 12pt
+}
+
+.label {
+	text-align: left;
+}
+
+div.console {
+	text-align: left;
+	color: Black;
+	font-size: 12pt;
+	word-wrap: break-word;
+	border:2px solid;
+	border-radius:10px;
+	width:600px;
+	height:600px;
+	background:#FFF;
+	padding:0.5em;
+    overflow:auto;
+    cursor:default;
+}
+
+div.jquery-console-focus span.jquery-console-cursor {
+	background: #333;
+	color: #eee;
+	font-weight: bold
+}

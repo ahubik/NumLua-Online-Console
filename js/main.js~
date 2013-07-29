@@ -1,0 +1,115 @@
+//Using Jquery Console
+/**
+ * TO DO: 
+ * Correct extraneous prompts when writing to console.
+ * 
+ * replace/augment kludge in commandResult with a system for waiting for a server
+ * 		result and eventually giving up on the server and giving an error message.
+ */
+
+$(document).ready(function() {
+	/**
+	 * Things that happen as soon as open, most of everything. Define jquery fns
+	 * here. *
+	 */
+	var DisplayFunction = {};
+	MakeConsole();
+	$("#btnConnect").click(function() {
+		Connect()
+	});
+
+	$("#btnTest").click(function() {
+		Serverws.send('print(\"Hello, World.\")');
+	});
+
+	$('#input').keypress(function(event) {
+		// console.log('Jquery Handler for input.keypress() called.');
+		which = String(event.which);
+		// console.log(which);
+		if (event.which == 13) {
+			console.log('sending');
+			texttosend = $("#input").val();
+			console.log(texttosend);
+			sendnewtext();
+		}
+	});
+});
+
+$(".statusfield").change(function() {
+	console.log('scrolling to bottom');
+	scrollToBottom();
+});
+
+function Connect() {
+	//address = new String($("#addressfield").val());uncomment this if server address needs to be set every time
+	address = "ws://localhost:6582"; // change this to change server address for long-term change in server location
+	protocolexists = new Boolean(false);
+
+	/*if ($("#protocolfield").val() != "") {
+		protocolexists = true;
+	}*/
+	
+	var alerttext = "\nConnecting to server at ";
+	alerttext = alerttext.concat(address);
+	if (protocolexists) {
+		protocol = new String($("#protocolfield").val()); 
+		alerttext = alerttext.concat(" with protocol ");
+		alerttext = alerttext.concat(protocol);
+	}
+	
+	protocolexists = true; // <--Kludge
+	
+	$("#statusfield").append(alerttext);
+	if (protocolexists) {
+		Serverws = new WebSocket(address, "repl"); // Fix this again, but
+		// only if there's a
+		// problem
+	} else {
+		Serverws = new WebSocket(address);
+	}
+	Serverws.onmessage = function(evt) {
+		// console.log('Received a message.');
+		onMessage(evt);
+	}
+};
+
+function MakeConsole() {
+	var consoleDiv = $('<div class="console">');
+	$('#ConsoleContainer').append(consoleDiv);
+
+	var controller = consoleDiv.console({
+		promptLabel : '>> ',
+		continuedPromptLabel : ' -> ',
+		commandValidate : function(line) {
+			if (line == "")
+				return false;
+			else
+				return true;
+		},
+		commandHandle : function(line, report) {
+
+			controller.continuedPrompt = false;
+			//console.log("Execute: " + line);
+			//report("sending " + line);
+			Serverws.send(line);
+			return true;
+
+		},
+		promptHistory : true,
+		continuedPrompt : false
+		//autofocus : true
+	});
+	//controller.display("The function extern.notice has been called")
+	function Display(text) {
+		controller.display(text);
+	}
+	DisplayFunction = controller.display;
+}
+
+
+
+function onMessage(evt) {
+	console.log("got message");
+	DisplayFunction(evt.data);
+	// $("#statusfield").append("\nRecived message.");
+};
