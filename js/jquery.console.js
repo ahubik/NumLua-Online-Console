@@ -1,4 +1,4 @@
-// JQuery Console 1.0
+// JQuery Console 1.0 (with modifications by Luis Carvalho and Alexander Hubik)
 // Sun Feb 21 20:28:47 GMT 2010
 //
 // Copyright 2010 Chris Done, Simon David Pratt. All rights reserved.
@@ -499,7 +499,7 @@ acceptInput = true;
 
 ////////////////////////////////////////////////////////////////////////
 // Reset the prompt in invalid command
-function commandResult(msg,className) {
+function commandResult(msg,className, noprompt) {
 column = -1;
 updatePromptDisplay();
 if (typeof msg == 'string') {
@@ -512,7 +512,9 @@ message(ret.msg,ret.className);
 } else { // Assume it's a DOM node or jQuery object.
 inner.append(msg);
 }
-//newPromptBox(); REINSTATE ASAP
+//if (!(noprompt)){
+//newPromptBox();
+//}
 };
 
 
@@ -527,10 +529,28 @@ mesg.show();
 };
 
 /////
-//USER CUSTOMIZED: add a way to call message() from outside code.
+//New by Carvalho & Hubik: add a way to call message() from outside code.
 extern.display = function(msg, className) {
 	console.log("extern.display called");
 	message(msg, className);
+	newPromptBox();
+};
+
+////////////////////////////////////////////////////////////////////////
+//New by Carvalho & Hubik: Display an image.  Incomplete, has errors.
+function displayimage(image,className) {
+var mesg = $('<div class="jquery-console-message"></div>');
+if (className) mesg.addClass(className);
+mesg.append(image).hide();
+inner.append(mesg);
+mesg.show();
+};
+
+/////
+//New by Carvalho & Hubik: add a way to call displayimage() from outside code.Incomplete, has errors.
+extern.displayImage = function(img, className) {
+	console.log("extern.displayImage called");
+	displayimage(img, className);
 	newPromptBox();
 };
 

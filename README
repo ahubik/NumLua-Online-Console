@@ -1,9 +1,22 @@
 This software is a browser-based UI client for a server which provides interpretation of entered Lua and Numeric Lua code.
 
-The software expects a server which:
--Provides a websocket connection at an adress and with a protocol stored as globals in the beginning of the javascript
+THe server source code is also provided, in the C files in the repository.
 
-Further documentation will be provided in future updates.
+Installation:
+
+Client:
+Save index.html, the js folder (containing the javascripts) and the css folder (containing the style sheet) in the same directory.  Correct the settings in main.js (in the js folder) to reflect your server setup, if neccesary. index.html should load with full functionality.
+
+Server:
+Server installation will be detailed in upcoming updates.
+
+Use:
+with the server running, load the client.  Click on the conect button, and enter Lua/Numeric Lua to the console.
+
+Details:
+Currently, There is no system for returning images or other non-text responses.
+
+Licence:
 
 This software is provided under the MIT Licence (http://opensource.org/licenses/MIT):
 

@@ -1,4 +1,7 @@
-/*
+/*This software is provided under the MIT Licence (http://opensource.org/licenses/MIT):
+
+The MIT License (MIT)
+
 Copyright (c) 2013 Luis Carvalho and Alexander Hubik
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -17,8 +20,7 @@ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-THE SOFTWARE.
-*/
+THE SOFTWARE.*/
 
 @CHARSET "UTF-8";
 
@@ -58,4 +60,16 @@ div.jquery-console-focus span.jquery-console-cursor {
 	background: #333;
 	color: #eee;
 	font-weight: bold
+}
+
+div.red{
+	color: #F00
+}
+
+div.green{
+	color: #0F0
+}
+
+div.blue{
+	color: #00F
 }
